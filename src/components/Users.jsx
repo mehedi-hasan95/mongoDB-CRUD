@@ -3,14 +3,33 @@ import React, { useState } from 'react';
 const Users = () => {
     const [user, setUser] = useState({});
     const handleSubmit = e => {
+
         e.preventDefault();
-        console.log(user);
+
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.acknowledged) {
+                alert('User added sucessfully');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        e.target.reset();
     }
 
     const clickBlur = e => {
         const field = e.target.name;
         const value = e.target.value;
-        const newUser = {...user};
+        const newUser = { ...user };
         newUser[field] = value;
         setUser(newUser);
     }
