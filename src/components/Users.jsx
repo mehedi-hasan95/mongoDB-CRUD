@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const Users = () => {
     const [user, setUser] = useState({});
+    const [dUser, setDuser] = useState(user);
     const handleSubmit = e => {
 
         e.preventDefault();
@@ -17,6 +18,8 @@ const Users = () => {
         .then((data) => {
             if(data.acknowledged) {
                 alert('User added sucessfully');
+                const newUser = [...dUser, data]
+                setDuser(newUser);
             }
         })
         .catch((error) => {
@@ -40,7 +43,7 @@ const Users = () => {
             <form onSubmit={handleSubmit}>
                 <input onBlur={clickBlur} type="text" name="name" id="" placeholder='Your Name' required /><br />
                 <input onBlur={clickBlur} type="text" name="address" id="" placeholder='Your Address' required /><br />
-                <input onClick={clickBlur} type="email" name="email" id="" placeholder='Your Email' required /> <br />
+                <input onBlur={clickBlur} type="email" name="email" id="" placeholder='Your Email' required /> <br />
                 <input type="submit" value="Submit" />
             </form>
         </div>
