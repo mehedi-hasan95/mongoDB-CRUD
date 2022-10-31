@@ -5,7 +5,9 @@ import Users from './components/Users';
 
 function App() {
   const router = createBrowserRouter([
-    {path: '/', element: <Home></Home>},
+    {path: '/', element: <Home></Home>,
+    loader: () => fetch('http://localhost:5000/users')
+  },
     {path: '/users', element: <Users></Users>}
   ]);
   return (
