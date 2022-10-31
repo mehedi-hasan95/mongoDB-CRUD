@@ -8,7 +8,7 @@ function App() {
     {path: '/', element: <Home></Home>,
     loader: () => fetch('http://localhost:5000/users')
   },
-    {path: '/users', element: <Users></Users>}
+    {path: '/users', element: <Users></Users>},
   ]);
   return (
     <div className="App">
